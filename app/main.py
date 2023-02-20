@@ -19,8 +19,8 @@ settings = get_settings()
 app = FastAPI(root_path=settings.root_path, title="ShoppingStoreAPI")
 
 # include all routers
-plugins = [f[:-3] for f in resources.contents("app.routers")
-           if f.endswith(".py") and f[0] != "_"]
+plugins = [f.name[:-3] for f in resources.files("app.routers").iterdir()
+           if f.name.endswith(".py") and f.name[0] != "_"]
 for plugin in plugins:
     router = importlib.import_module(f"app.routers.{plugin}")
     app.include_router(router.router)
