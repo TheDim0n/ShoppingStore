@@ -7,7 +7,6 @@ from app.dependencies import get_db, get_settings
 from app.main import app
 
 
-
 settings = get_settings()
 
 SQLALCHEMY_DATABASE_URL = settings.database_url

@@ -1,5 +1,3 @@
-import typing as tp
-
 from pydantic import BaseModel
 
 from app.schemas.user import UserDB

@@ -1,5 +1,6 @@
+# flake8: noqa : F401
 from app.database.crud import (
     customer,
     user,
     product
-) # noqa F401
+)

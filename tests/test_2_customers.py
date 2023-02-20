@@ -56,7 +56,6 @@ def test_customer_post_method():
     assert test_customer_uuid is not None
 
 
-
 def test_customer_get_method():
     access_token = get_access_token(
         client, settings.initial_user_username, settings.initial_user_password

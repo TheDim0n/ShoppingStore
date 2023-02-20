@@ -1,6 +1,5 @@
 import typing as tp
 
-from sqlalchemy import update
 from sqlalchemy.orm import Session
 
 
@@ -21,7 +20,7 @@ def read_products(db: Session) -> tp.List[Product]:
 
 
 def update_product_by_id(db: Session, id: int, data: product.ProductBase) -> Product:
-    db_product = db.query(Product).filter_by(id=id).update(data.dict())
+    db.query(Product).filter_by(id=id).update(data.dict())
     db.commit()
     return get_product_by_id(db, id)
 

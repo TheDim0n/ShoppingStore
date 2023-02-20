@@ -30,6 +30,6 @@ def remove_customer_by_uuid(db: Session, uuid: str) -> None:
 
 
 def update_cutomer_by_uuid(db: Session, uuid: str, data: customer.CustomerBase) -> None:
-    db_customer = db.query(Customer).filter_by(uuid=uuid).update(data.dict())
+    db.query(Customer).filter_by(uuid=uuid).update(data.dict())
     db.commit()
     return get_customer_by_uuid(db, uuid)

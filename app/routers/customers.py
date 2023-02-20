@@ -23,8 +23,10 @@ async def read_customers(db=Depends(get_db)) -> List[customer.CustomerDB]:
 
 
 @router.post("", status_code=201, summary="Create new customer")
-async def create_customer(new_customer: customer.CustomerCreate,
-                      db=Depends(get_db)) -> customer.CustomerDB:
+async def create_customer(
+    new_customer: customer.CustomerCreate,
+    db=Depends(get_db)
+) -> customer.CustomerDB:
     return crud.customer.create_customer(db=db, new_customer=new_customer)
 
 

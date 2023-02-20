@@ -54,7 +54,6 @@ def test_product_post_method():
     assert test_product_id is not None
 
 
-
 def test_products_get_method():
     access_token = get_access_token(
         client, settings.initial_user_username, settings.initial_user_password
