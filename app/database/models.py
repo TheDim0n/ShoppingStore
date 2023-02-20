@@ -6,8 +6,9 @@ from sqlalchemy.dialects.postgresql import UUID
 from .database import DataBase
 
 
-class Message(DataBase):
-    __tablename__ = "message"
+class User(DataBase):
+    __tablename__ = "user"
 
     uuid = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    message = Column(String(), nullable=False)
+    login = Column(String, nullable=False)
+    hashed_password = Column(String, nullable=False)
