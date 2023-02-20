@@ -14,7 +14,7 @@ router = APIRouter(
 )
 
 
-@router.get('/', summary="Read users")
+@router.get("", summary="Read users")
 async def read_users(db=Depends(get_db)) -> List[user.UserDB]:
     users: List[user.UserDB] = crud.user.read_users(db)
     if not users:
@@ -22,7 +22,7 @@ async def read_users(db=Depends(get_db)) -> List[user.UserDB]:
     return users
 
 
-@router.post('/', status_code=201, summary="Create new user")
+@router.post("", status_code=201, summary="Create new user")
 async def create_user(new_user: user.UserCreate,
                       db=Depends(get_db)) -> user.UserDB:
     return crud.user.create_user(db=db, new_user=new_user)

@@ -1,3 +1,5 @@
 from app.database.crud import (
-    user
+    customer,
+    user,
+    product
 ) # noqa F401

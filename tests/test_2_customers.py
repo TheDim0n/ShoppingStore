@@ -33,38 +33,65 @@ app.dependency_overrides[get_db] = override_get_db
 
 client = TestClient(app, base_url="http://localhost")
 
-test_user_uuid: str = ''
+test_customer_uuid: str = ''
 
 
-def test_user_get_method():
+def test_customer_post_method():
     access_token = get_access_token(
         client, settings.initial_user_username, settings.initial_user_password
     )
     headers = {"Authorization": f"Bearer {access_token}"}
-    response: Response = client.get("/users", headers=headers)
+    test_customer = {
+        "full_name": "Tester Testerov Testerovich",
+        "birth_year": 2000,
+        "registration_date": "2023-02-20",
+        "pd_consent": 1,
+        "sex": "М"
+    }
+    response: response = client.post("/customers", json=test_customer, headers=headers)
+    assert response.status_code == 201
+
+    global test_customer_uuid
+    test_customer_uuid = response.json()["uuid"]
+    assert test_customer_uuid is not None
+
+
+
+def test_customer_get_method():
+    access_token = get_access_token(
+        client, settings.initial_user_username, settings.initial_user_password
+    )
+    headers = {"Authorization": f"Bearer {access_token}"}
+    response: Response = client.get("/customers", headers=headers)
     assert response.status_code == 200
     assert len(response.json()) > 0
 
 
-def test_user_post_method():
+def test_customer_put_method():
     access_token = get_access_token(
         client, settings.initial_user_username, settings.initial_user_password
     )
     headers = {"Authorization": f"Bearer {access_token}"}
-    test_user = {"login": "test", "password": "test", "full_name": "Test User"}
-    response: response = client.post("/users", json=test_user, headers=headers)
+    new_customer_data = {
+        "full_name": "Tester Testerov Testerovich",
+        "birth_year": 2000,
+        "registration_date": "2023-02-20",
+        "pd_consent": 0,
+        "sex": "М"
+    }
+
+    global test_customer_uuid
+    response: response = client.put(f"/customers/{test_customer_uuid}", json=new_customer_data, headers=headers)
     assert response.status_code == 201
-
-    global test_user_uuid
-    test_user_uuid = response.json()["uuid"]
-    assert test_user_uuid is not None
+    assert response.json()["birth_year"] == 2000
+    assert response.json()["pd_consent"] == 0
 
 
-def test_user_delete_method():
+def test_customer_delete_method():
     access_token = get_access_token(
         client, settings.initial_user_username, settings.initial_user_password
     )
     headers = {"Authorization": f"Bearer {access_token}"}
-    global test_user_uuid
-    response = client.delete(f"/users/{test_user_uuid}", headers=headers)
+    global test_customer_uuid
+    response = client.delete(f"/customers/{test_customer_uuid}", headers=headers)
     assert response.status_code == 204

@@ -1,7 +1,7 @@
 import importlib
 
 from importlib import resources
-from fastapi import Depends, FastAPI, Request, Response
+from fastapi import FastAPI, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 
@@ -11,7 +11,6 @@ from app.database.crud import user
 from app.dependencies import get_settings
 from app.schemas.user import UserCreate
 from app.utils import password as passwd
-from app.utils import auth
 
 
 settings = get_settings()

@@ -33,38 +33,64 @@ app.dependency_overrides[get_db] = override_get_db
 
 client = TestClient(app, base_url="http://localhost")
 
-test_user_uuid: str = ''
+test_product_id: int | None = None
 
 
-def test_user_get_method():
+def test_product_post_method():
     access_token = get_access_token(
         client, settings.initial_user_username, settings.initial_user_password
     )
     headers = {"Authorization": f"Bearer {access_token}"}
-    response: Response = client.get("/users", headers=headers)
+    test_product = {
+        "name": "test product",
+        "purchase_cost": 1000,
+        "selling_price": 1200.5,
+    }
+    response: response = client.post("/products", json=test_product, headers=headers)
+    assert response.status_code == 201
+
+    global test_product_id
+    test_product_id = response.json()["id"]
+    assert test_product_id is not None
+
+
+
+def test_products_get_method():
+    access_token = get_access_token(
+        client, settings.initial_user_username, settings.initial_user_password
+    )
+    headers = {"Authorization": f"Bearer {access_token}"}
+    response: Response = client.get("/products", headers=headers)
     assert response.status_code == 200
     assert len(response.json()) > 0
 
 
-def test_user_post_method():
+def test_products_put_method():
     access_token = get_access_token(
         client, settings.initial_user_username, settings.initial_user_password
     )
     headers = {"Authorization": f"Bearer {access_token}"}
-    test_user = {"login": "test", "password": "test", "full_name": "Test User"}
-    response: response = client.post("/users", json=test_user, headers=headers)
+    new_product_data = {
+        "name": "test product",
+        "purchase_cost": 1000,
+        "selling_price": 1500,
+    }
+
+    global test_product_id
+    response: response = client.put(
+        f"/products/{test_product_id}",
+        json=new_product_data, headers=headers
+    )
     assert response.status_code == 201
-
-    global test_user_uuid
-    test_user_uuid = response.json()["uuid"]
-    assert test_user_uuid is not None
+    assert response.json()["name"] == "test product"
+    assert response.json()["selling_price"] == 1500
 
 
-def test_user_delete_method():
+def test_product_delete_method():
     access_token = get_access_token(
         client, settings.initial_user_username, settings.initial_user_password
     )
     headers = {"Authorization": f"Bearer {access_token}"}
-    global test_user_uuid
-    response = client.delete(f"/users/{test_user_uuid}", headers=headers)
+    global test_product_id
+    response = client.delete(f"/products/{test_product_id}", headers=headers)
     assert response.status_code == 204

@@ -44,7 +44,7 @@ def run_migrations_offline():
     url = config.get_main_option("sqlalchemy.url")
 
     context.configure(
-        url=url,
+        url=SQLALCHEMY_DATABASE_URL,
         target_metadata=target_metadata,
         dialect_opts={"paramstyle": "named"},
     )
@@ -68,8 +68,9 @@ def run_migrations_online():
 
     with connectable.connect() as connection:
         context.configure(
+            url=SQLALCHEMY_DATABASE_URL,
             connection=connection,
-            target_metadata=target_metadata,
+            target_metadata=target_metadata
         )
 
         with context.begin_transaction():
