@@ -7,7 +7,7 @@ from app.database.database import DataBase
 from app.dependencies import get_db, get_settings
 from app.main import app
 
-from tests.common import get_access_token
+from tests.common import get_headers
 
 settings = get_settings()
 
@@ -37,10 +37,10 @@ test_product_id: int | None = None
 
 
 def test_product_post_method():
-    access_token = get_access_token(
+    headers = get_headers(
         client, settings.initial_user_username, settings.initial_user_password
     )
-    headers = {"Authorization": f"Bearer {access_token}"}
+
     test_product = {
         "name": "test product",
         "purchase_cost": 1000,
@@ -55,20 +55,20 @@ def test_product_post_method():
 
 
 def test_products_get_method():
-    access_token = get_access_token(
+    headers = get_headers(
         client, settings.initial_user_username, settings.initial_user_password
     )
-    headers = {"Authorization": f"Bearer {access_token}"}
+
     response: Response = client.get("/products", headers=headers)
     assert response.status_code == 200
     assert len(response.json()) > 0
 
 
 def test_products_put_method():
-    access_token = get_access_token(
+    headers = get_headers(
         client, settings.initial_user_username, settings.initial_user_password
     )
-    headers = {"Authorization": f"Bearer {access_token}"}
+
     new_product_data = {
         "name": "test product",
         "purchase_cost": 1000,
@@ -86,10 +86,10 @@ def test_products_put_method():
 
 
 def test_product_delete_method():
-    access_token = get_access_token(
+    headers = get_headers(
         client, settings.initial_user_username, settings.initial_user_password
     )
-    headers = {"Authorization": f"Bearer {access_token}"}
+
     global test_product_id
     response = client.delete(f"/products/{test_product_id}", headers=headers)
     assert response.status_code == 204

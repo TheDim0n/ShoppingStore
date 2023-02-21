@@ -11,6 +11,7 @@ from app.database.crud import user
 from app.dependencies import get_settings
 from app.schemas.user import UserCreate
 from app.utils import password as passwd
+from app.utils.mock import write_mock_data
 
 
 settings = get_settings()
@@ -56,3 +57,6 @@ async def startup_event():
                 password=passwd.hash(settings.initial_user_password)
             )
             user.create_user(db, new_user)
+
+        if settings.load_mock:
+            write_mock_data(db)

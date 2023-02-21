@@ -15,6 +15,7 @@ def create_customer(db: Session, new_customer: customer.CustomerCreate) -> Custo
     return db_customer
 
 
+
 def read_customers(db: Session) -> tp.List[Customer]:
     return db.query(Customer).all()
 

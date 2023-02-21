@@ -7,6 +7,7 @@ class Settings(BaseSettings):
 
     # main app settings
     debug: bool = False
+    load_mock: bool = False
     secret_key: str
     access_token_expires_minutes: int
     refresh_token_expires_days: int

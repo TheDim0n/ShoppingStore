@@ -1,0 +1,23 @@
+[
+    {
+        "full_name": "Customer 1",
+        "birth_year": 1980,
+        "registration_date": "2023-02-10",
+        "pd_consent": 0,
+        "sex": "Ж"
+    },
+    {
+        "full_name": "Customer 2",
+        "birth_year": 2000,
+        "registration_date": "2023-02-15",
+        "pd_consent": 1,
+        "sex": "М"
+    },
+    {
+        "full_name": "Customer 3",
+        "birth_year": 1992,
+        "registration_date": "2023-02-19",
+        "pd_consent": 1,
+        "sex": "М"
+    }
+]

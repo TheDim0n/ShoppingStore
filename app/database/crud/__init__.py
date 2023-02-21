@@ -2,5 +2,7 @@
 from app.database.crud import (
     customer,
     user,
-    product
+    product,
+    purchase,
+    reports
 )

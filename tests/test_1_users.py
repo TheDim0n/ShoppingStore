@@ -7,7 +7,7 @@ from app.database.database import DataBase
 from app.dependencies import get_db, get_settings
 from app.main import app
 
-from tests.common import get_access_token
+from tests.common import get_headers
 
 settings = get_settings()
 
@@ -37,20 +37,20 @@ test_user_uuid: str = ''
 
 
 def test_user_get_method():
-    access_token = get_access_token(
+    headers = get_headers(
         client, settings.initial_user_username, settings.initial_user_password
     )
-    headers = {"Authorization": f"Bearer {access_token}"}
+
     response: Response = client.get("/users", headers=headers)
     assert response.status_code == 200
     assert len(response.json()) > 0
 
 
 def test_user_post_method():
-    access_token = get_access_token(
+    headers = get_headers(
         client, settings.initial_user_username, settings.initial_user_password
     )
-    headers = {"Authorization": f"Bearer {access_token}"}
+
     test_user = {"login": "test", "password": "test", "full_name": "Test User"}
     response: response = client.post("/users", json=test_user, headers=headers)
     assert response.status_code == 201
@@ -61,10 +61,10 @@ def test_user_post_method():
 
 
 def test_user_delete_method():
-    access_token = get_access_token(
+    headers = get_headers(
         client, settings.initial_user_username, settings.initial_user_password
     )
-    headers = {"Authorization": f"Bearer {access_token}"}
+
     global test_user_uuid
     response = client.delete(f"/users/{test_user_uuid}", headers=headers)
     assert response.status_code == 204

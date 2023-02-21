@@ -16,3 +16,13 @@ def get_access_token(
     assert response.json()["access_token"]
 
     return response.json()["access_token"]
+
+
+def get_headers(
+    client: TestClient,
+    username: str,
+    password: str,
+) -> dict:
+    access_token = get_access_token(client, username, password)
+    headers = {"Authorization": f"Bearer {access_token}"}
+    return headers
