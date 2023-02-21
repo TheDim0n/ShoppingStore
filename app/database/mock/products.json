@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Product 1",
+        "purchase_cost": 30,
+        "selling_price": 50
+    },
+    {
+        "name": "Product 2",
+        "purchase_cost": 550.50,
+        "selling_price": 900
+    },
+    {
+        "name": "Product 3",
+        "purchase_cost": 4322.34,
+        "selling_price": 5434.64
+    }
+]
