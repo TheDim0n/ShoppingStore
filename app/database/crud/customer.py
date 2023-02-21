@@ -23,6 +23,10 @@ def get_customer_by_uuid(db: Session, uuid: str) -> Customer:
     return db.query(Customer).filter_by(uuid=uuid).first()
 
 
+def get_customer_by_name(db: Session, name: str) -> Customer:
+    return db.query(Customer).filter_by(full_name=name).first()
+
+
 def remove_customer_by_uuid(db: Session, uuid: str) -> None:
     db_customer = get_customer_by_uuid(db=db, uuid=uuid)
     db.delete(db_customer)

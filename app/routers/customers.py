@@ -27,6 +27,12 @@ async def create_customer(
     new_customer: customer.CustomerCreate,
     db=Depends(get_db)
 ) -> customer.CustomerDB:
+    db_customer = crud.customer.get_customer_by_name(db, new_customer.full_name)
+    if db_customer:
+        raise HTTPException(
+            status_code=409,
+            detail="Costomer with such name already exists"
+        )
     return crud.customer.create_customer(db=db, new_customer=new_customer)
 
 

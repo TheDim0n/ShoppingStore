@@ -25,6 +25,9 @@ async def read_users(db=Depends(get_db)) -> List[user.UserDB]:
 @router.post("", status_code=201, summary="Create new user")
 async def create_user(new_user: user.UserCreate,
                       db=Depends(get_db)) -> user.UserDB:
+    db_user = crud.user.get_user_by_login(db, new_user.login)
+    if db_user:
+        return db_user
     return crud.user.create_user(db=db, new_user=new_user)
 
 
