@@ -31,7 +31,6 @@ async def read_purchase(id: int, db=Depends(get_db)) -> purchase.PurchaseDB:
     return purchase
 
 
-
 @router.post("", status_code=201, summary="Create new user")
 async def create_purchases(
     new_purchase: purchase.PurchaseCreate,
@@ -52,4 +51,3 @@ async def update_purchase_products(
     db=Depends(get_db)
 ) -> List[PurchaseProductDB]:
     return crud.purchase.update_purchase_products_by_id(db, id, products)
-    return db_purchase.products

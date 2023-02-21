@@ -6,8 +6,7 @@ from uuid import UUID
 
 
 from app.schemas.customer import CustomerDB
-from app.schemas.product import ProductDB
-from app.schemas.purchase_product import *
+from app.schemas.purchase_product import PurchaseProductCreate, PurchaseProductDB
 
 
 class PurchaseBase(BaseModel):

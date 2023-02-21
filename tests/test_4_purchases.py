@@ -140,7 +140,7 @@ def test_purchases_delete_method():
     )
 
     global test_purchase_id
-    response:Response = client.delete(f"/purchases/{test_purchase_id}", headers=headers)
+    response: Response = client.delete(f"/purchases/{test_purchase_id}", headers=headers)
     assert response.status_code == 204
 
     response: Response = client.get(f"/purchases/{test_purchase_id}", headers=headers)

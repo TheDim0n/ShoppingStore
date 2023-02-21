@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 
 
 from app.schemas import purchase
-from app.schemas.purchase_product import *
+from app.schemas.purchase_product import PurchaseProductCreate
 from app.database.models import Purchase, PurchaseProduct
 
 
@@ -53,8 +53,6 @@ def update_purchase_products_by_id(
         return db_purchase.products
     except Exception:
         db.rollback()
-
-
 
 
 def remove_purchase_by_uuid(db: Session, id: int) -> None:

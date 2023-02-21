@@ -4,7 +4,6 @@ import uuid
 from sqlalchemy import Column, String, Integer, Date, Boolean, Float, ForeignKey
 from sqlalchemy.dialects.postgresql import UUID, ENUM
 from sqlalchemy.orm import relationship
-from sqlalchemy.sql.functions import now
 
 from app.database.database import DataBase
 from app.utils import enums

@@ -13,6 +13,7 @@ router = APIRouter(
     dependencies=[Depends(auth.get_current_user)]
 )
 
+
 @router.get("/customers/profit", summary="Profit pre customer")
 async def cutomers_profit(
     start_date: str = None,
