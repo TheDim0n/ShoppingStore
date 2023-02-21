@@ -42,6 +42,10 @@ or with `python`:
   pip install -r requirements.txt
   ```
 - create `.env` file to configurate application (see `Configuration` section)
+- Apply database migrations:
+  ```
+  python migrate.py
+  ```
 - Run application:
   ```
   python run.py
