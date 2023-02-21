@@ -27,6 +27,9 @@ async def create_product(
     new_product: product.ProductBase,
     db=Depends(get_db)
 ) -> product.ProductDB:
+    db_product = crud.product.get_product_by_name(db, new_product.name)
+    if db_product:
+        return db_product
     return crud.product.create_product(db=db, new_product=new_product)
 
 

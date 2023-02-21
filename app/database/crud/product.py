@@ -29,6 +29,10 @@ def get_product_by_id(db: Session, id: int) -> Product:
     return db.query(Product).filter_by(id=id).first()
 
 
+def get_product_by_name(db: Session, name: str) -> Product:
+    return db.query(Product).filter_by(name=name).first()
+
+
 def remove_product_by_id(db: Session, id: int) -> None:
     db_product = get_product_by_id(db=db, id=id)
     db.delete(db_product)

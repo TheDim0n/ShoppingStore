@@ -4,6 +4,14 @@ Backend for abstract shopping store.
 
 [![Tests](https://github.com/TheDim0n/ShoppingStore/actions/workflows/tests.yml/badge.svg)](https://github.com/TheDim0n/ShoppingStore/actions/workflows/tests.yml)
 
+### Requirements
+
+- Python 3.10 or later
+
+or
+
+- Docker
+
 ### Configuration
 
 Available environment variables:
