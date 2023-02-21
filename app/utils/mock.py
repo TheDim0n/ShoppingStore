@@ -1,5 +1,6 @@
 import json
 import typing as tp
+import os
 
 from sqlalchemy.orm import Session
 
@@ -18,8 +19,10 @@ def read_json(path: str) -> dict:
 
 def write_mock_data(db: Session) -> None:
     try:
-        customers: tp.List[CustomerCreate] = read_json(r"app\database\mock\customers.json")
-        products: tp.List[CustomerCreate] = read_json(r"app\database\mock\products.json")
+        customers: tp.List[CustomerCreate] = read_json(
+            os.path.join("app", "database", "mock", "customers.json"))
+        products: tp.List[CustomerCreate] = read_json(
+            os.path.join("app", "database", "mock", "products.json"))
 
         db_customers: tp.List[str] = []
         for customer in customers:
